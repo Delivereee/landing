@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 언어별 버튼 텍스트 설정 (기본적으로 모두 숨김) */
+        .cta-text {
+            display: none;
+        }
+        
+        /* 언어에 따라 해당 텍스트만 표시 */
+        html[lang="en"] .cta-text.en {
+            display: inline;
+        }
+        
+        html[lang="ja"] .cta-text.ja {
+            display: inline;
+        }
+        
+        html[lang="zh-CN"] .cta-text.cn {
+            display: inline;
+        }
+        
+        html[lang="zh-TW"] .cta-text.tw {
+            display: inline;
+        }
+        
+        /* 기본 언어(한국어)는 항상 표시 */
+        html:not([lang="en"]):not([lang="ja"]):not([lang="zh-CN"]):not([lang="zh-TW"]) .cta-text.ko {
+            display: inline;
+        }
+
+        /* 언어별 이미지 설정 (기본적으로 모두 숨김) */
+        .lang-img {
+            display: none;
+            width: 100%; /* 이미지를 화면 가로 너비에 맞춤 */
+            height: auto; /* 높이는 자동으로 비율 유지 */
+        }
+        
+        /* 언어에 따라 해당 이미지만 표시 */
+        html[lang="en"] .lang-img.en {
+            display: block;
+        }
+        
+        html[lang="ja"] .lang-img.ja {
+            display: block;
+        }
+        
+        html[lang="zh-CN"] .lang-img.cn {
+            display: block;
+        }
+        
+        html[lang="zh-TW"] .lang-img.tw {
+            display: block;
+        }
+        
+        /* 기본 언어(한국어)는 항상 표시 */
+        html:not([lang="en"]):not([lang="ja"]):not([lang="zh-CN"]):not([lang="zh-TW"]) .lang-img.ko {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 언어별 이미지 -->
+        <div class="lang-img-wrapper">
+            <img src="images/enbackground.png" alt="Background Image English" class="lang-img en">
+            <img src="images/jabackground.png" alt="Background Image Japanese" class="lang-img ja">
+            <img src="images/cnbackground.png" alt="Background Image Chinese Simplified" class="lang-img cn">
+            <img src="images/twbackground.png" alt="Background Image Chinese Traditional" class="lang-img tw">
+            <img src="images/enbackground.png" alt="Background Image Korean" class="lang-img ko">
+        </div>
+        
+        <div class="cta-button-container">
+            <a href="https://delivereee.github.io/home" class="cta-button">
+                <span class="cta-text en">Start Ordering</span>
+                <span class="cta-text ja">注文を始める</span>
+                <span class="cta-text cn">开始点餐</span>
+                <span class="cta-text tw">開始訂餐</span>
+                <span class="cta-text ko">시작하기</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 지원하는 언어 목록
+            const supportedLanguages = {
+                'en': 'en',
+                'ja': 'ja',
+                'zh-cn': 'zh-CN',
+                'zh-tw': 'zh-TW',
+                'ko': 'ko'
+            };
+            
+            // 브라우저 언어 가져오기
+            let userLang = navigator.language || navigator.userLanguage;
+            userLang = userLang.toLowerCase();
+            
+            // 언어 코드 추출 (예: 'en-US'에서 'en')
+            const langCode = userLang.split('-')[0];
+            
+            // html lang 속성 설정
+            if (supportedLanguages[langCode]) {
+                document.documentElement.lang = supportedLanguages[langCode];
+            } else {
+                document.documentElement.lang = 'ko'; // 기본값을 한국어로 설정
+            }
+            
+            console.log('Current language:', document.documentElement.lang);
+        });
+    </script>
+</body>
+</html> 
