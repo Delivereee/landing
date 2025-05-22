@@ -20,10 +20,12 @@
             display: inline;
         }
         
+        /* 중국어 간체 */
         html[lang="zh-CN"] .cta-text.cn {
             display: inline;
         }
         
+        /* 중국어 번체 */
         html[lang="zh-TW"] .cta-text.tw {
             display: inline;
         }
@@ -49,10 +51,12 @@
             display: block;
         }
         
+        /* 중국어 간체 */
         html[lang="zh-CN"] .lang-img.cn {
             display: block;
         }
         
+        /* 중국어 번체 */
         html[lang="zh-TW"] .lang-img.tw {
             display: block;
         }
@@ -72,6 +76,9 @@
             <img src="images/cnbackground.png" alt="Background Image Chinese Simplified" class="lang-img cn">
             <img src="images/twbackground.png" alt="Background Image Chinese Traditional" class="lang-img tw">
         </div>
+        
+        <!-- 버튼 아래 여백을 위한 추가 공간 -->
+        <div class="bottom-spacer"></div>
         
         <div class="cta-button-container">
             <a href="https://delivereee.github.io/home" class="cta-button">
@@ -95,9 +102,9 @@
             // 전체 언어 코드 또는 하위 언어 코드 패턴 확인
             if (userLang.startsWith('ja')) {
                 targetLang = 'ja';
-            } else if (userLang.startsWith('zh-cn') || userLang.startsWith('zh-hans')) {
+            } else if (userLang.match(/^zh[-_]hans/i) || userLang.match(/^zh[-_]cn/i)) {
                 targetLang = 'zh-CN';
-            } else if (userLang.startsWith('zh-tw') || userLang.startsWith('zh-hant')) {
+            } else if (userLang.match(/^zh[-_]hant/i) || userLang.match(/^zh[-_]tw/i) || userLang.match(/^zh[-_]hk/i)) {
                 targetLang = 'zh-TW';
             } else if (userLang.startsWith('zh')) {
                 // 일반 중국어는 간체로 처리

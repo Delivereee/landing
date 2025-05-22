@@ -32,17 +32,25 @@ body, html {
     display: block;
     margin: 0 auto;
     /* 이미지 하단을 약 10cm(약 378px) 크롭 */
-    margin-bottom: -328px;
+    margin-bottom: -378px;
+}
+
+/* 버튼 아래 여백을 위한 공간 */
+.bottom-spacer {
+    width: 100%;
+    height: 150px; /* 버튼 높이 + 여백 */
+    margin-bottom: 150px; /* 추가 여백 */
 }
 
 .cta-button-container {
-    position: relative; /* fixed에서 relative로 변경 */
+    position: fixed; /* 화면에 고정 */
+    bottom: 40px; /* 화면 하단에서 40px 위에 위치 */
+    left: 0;
     width: 100%;
     display: flex;
     justify-content: center;
     z-index: 10;
-    padding: 1000px 0 328px 0; /* 상단 30px, 하단 10cm(378px) 여백 추가 */
-    background-color: #fff; /* 버튼 영역 배경색 */
+    padding: 0;
 }
 
 .cta-button {
@@ -54,16 +62,29 @@ body, html {
     font-weight: bold;
     font-size: 2.2rem;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 그림자 강화 */
     width: 370px;
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 텍스트 그림자 추가 */
     transition: all 0.3s ease;
+    animation: float 3s ease-in-out infinite; /* 부드러운 부유 애니메이션 */
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+    transform: translateY(-5px) scale(1.05); /* 호버 시 약간 커지고 위로 이동 */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4); /* 호버 시 그림자 강화 */
 }
 
 /* 언어별 버튼 스타일 조정 */
@@ -86,7 +107,12 @@ html[lang="zh-TW"] .cta-button {
 @media (max-width: 768px) {
     .lang-img {
         /* 모바일에서는 더 적게 크롭 (약 7cm, 약 265px) */
-        margin-bottom: -225px;
+        margin-bottom: -265px;
+    }
+    
+    .bottom-spacer {
+        height: 120px; /* 모바일에서는 여백 줄임 */
+        margin-bottom: 120px;
     }
     
     .cta-button {
@@ -97,6 +123,6 @@ html[lang="zh-TW"] .cta-button {
     }
     
     .cta-button-container {
-        padding: 20px 0 265px 0; /* 모바일에서는 상단 20px, 하단 7cm(265px) */
+        bottom: 30px; /* 모바일에서는 버튼을 더 위로 */
     }
 } 
