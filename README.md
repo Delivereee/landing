@@ -2,6 +2,21 @@
 
 A simple landing page with a full-screen background image and a CTA button that automatically switches images based on the user's browser language.
 
+## OG 이미지 설정
+
+소셜 미디어 공유를 위한 OG 이미지를 추가하세요:
+
+1. `og-image.jpg` 파일을 루트 디렉토리에 추가합니다.
+2. 권장 이미지 크기: 1200 x 630 픽셀
+3. 파일 크기: 8MB 미만
+
+## 파비콘 설정
+
+파비콘 파일을 추가하여 브라우저 탭에 아이콘을 표시하세요:
+
+1. `favicon.ico` 파일을 루트 디렉토리에 추가합니다.
+2. `apple-touch-icon.png` 파일을 iOS 기기용으로 추가합니다.
+
 ## 이미지 경로 설정
 
 각 언어별 이미지는 다음 경로에 위치해야 합니다:
@@ -28,4 +43,4 @@ A simple landing page with a full-screen background image and a CTA button that 
 - To change the button text, edit the text inside the `<a>` tag in `index.html`.
 - To change the button color, edit the `background-color` property in the `.cta-button` class in `styles.css`.
 - To adjust the button position, modify the `bottom` property in the `.cta-button-container` class in `styles.css`.
-- 지원하는 언어를 변경하려면 `index.html`의 `supportedLanguages` 배열을 수정하세요. 
+- 지원하는 언어를 변경하려면 `index.html`의 JavaScript 코드를 수정하세요. 
