@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -28,8 +28,8 @@
             display: inline;
         }
         
-        /* 기본 언어(한국어)는 항상 표시 */
-        html:not([lang="en"]):not([lang="ja"]):not([lang="zh-CN"]):not([lang="zh-TW"]) .cta-text.ko {
+        /* 기본 언어(영어)는 항상 표시 */
+        html:not([lang="ja"]):not([lang="zh-CN"]):not([lang="zh-TW"]) .cta-text.en {
             display: inline;
         }
 
@@ -57,8 +57,8 @@
             display: block;
         }
         
-        /* 기본 언어(한국어)는 항상 표시 */
-        html:not([lang="en"]):not([lang="ja"]):not([lang="zh-CN"]):not([lang="zh-TW"]) .lang-img.ko {
+        /* 기본 언어(영어)는 항상 표시 */
+        html:not([lang="ja"]):not([lang="zh-CN"]):not([lang="zh-TW"]) .lang-img.en {
             display: block;
         }
     </style>
@@ -71,7 +71,6 @@
             <img src="images/jabackground.png" alt="Background Image Japanese" class="lang-img ja">
             <img src="images/cnbackground.png" alt="Background Image Chinese Simplified" class="lang-img cn">
             <img src="images/twbackground.png" alt="Background Image Chinese Traditional" class="lang-img tw">
-            <img src="images/enbackground.png" alt="Background Image Korean" class="lang-img ko">
         </div>
         
         <div class="cta-button-container">
@@ -80,37 +79,36 @@
                 <span class="cta-text ja">注文を始める</span>
                 <span class="cta-text cn">开始点餐</span>
                 <span class="cta-text tw">開始訂餐</span>
-                <span class="cta-text ko">시작하기</span>
             </a>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // 지원하는 언어 목록
-            const supportedLanguages = {
-                'en': 'en',
-                'ja': 'ja',
-                'zh-cn': 'zh-CN',
-                'zh-tw': 'zh-TW',
-                'ko': 'ko'
-            };
-            
             // 브라우저 언어 가져오기
             let userLang = navigator.language || navigator.userLanguage;
             userLang = userLang.toLowerCase();
             
-            // 언어 코드 추출 (예: 'en-US'에서 'en')
-            const langCode = userLang.split('-')[0];
+            // 언어별 매핑 처리 개선
+            let targetLang = 'en'; // 기본값은 영어
             
-            // html lang 속성 설정
-            if (supportedLanguages[langCode]) {
-                document.documentElement.lang = supportedLanguages[langCode];
-            } else {
-                document.documentElement.lang = 'ko'; // 기본값을 한국어로 설정
+            // 전체 언어 코드 또는 하위 언어 코드 패턴 확인
+            if (userLang.startsWith('ja')) {
+                targetLang = 'ja';
+            } else if (userLang.startsWith('zh-cn') || userLang.startsWith('zh-hans')) {
+                targetLang = 'zh-CN';
+            } else if (userLang.startsWith('zh-tw') || userLang.startsWith('zh-hant')) {
+                targetLang = 'zh-TW';
+            } else if (userLang.startsWith('zh')) {
+                // 일반 중국어는 간체로 처리
+                targetLang = 'zh-CN';
             }
             
-            console.log('Current language:', document.documentElement.lang);
+            // html lang 속성 설정
+            document.documentElement.lang = targetLang;
+            
+            console.log('Detected language:', userLang);
+            console.log('Set language:', targetLang);
         });
     </script>
 </body>
